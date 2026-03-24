@@ -72,7 +72,7 @@ export default function Page() {
                     <div className="absolute inset-0 blur-xl bg-emerald-500/20 animate-pulse rounded-full" />
                 </div>
                 <div className="text-center">
-                    <p className="text-zinc-900 dark:text-zinc-100 font-extrabold text-xl tracking-tighter uppercase">Đang đồng bộ dữ liệu...</p>
+                    <p className="text-zinc-900 dark:text-zinc-100 font-black text-xl tracking-tighter uppercase">Đang đồng bộ dữ liệu...</p>
                     <p className="text-zinc-400 text-xs font-medium mt-1">Vui lòng đợi trong giây lát</p>
                 </div>
             </div>
@@ -86,14 +86,14 @@ export default function Page() {
                     <AlertCircle className="text-red-500" size={32} />
                 </div>
                 <div className="text-center">
-                    <h2 className="text-xl font-extrabold text-zinc-900 dark:text-zinc-100 tracking-tight">KHÔNG THỂ KẾT NỐI MÁY CHỦ</h2>
-                    <p className="text-zinc-500 text-sm mt-2 max-w-xs mx-auto">
+                    <h2 className="text-xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight text-center">KHÔNG THỂ KẾT NỐI MÁY CHỦ</h2>
+                    <p className="text-zinc-500 text-sm mt-2 max-w-xs mx-auto text-center">
                         Hệ thống đang gặp sự cố khi lấy tin tức mới nhất. Vui lòng thử lại sau.
                     </p>
                 </div>
                 <button
                     onClick={() => refetch()}
-                    className="px-8 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-extrabold uppercase tracking-widest rounded-full hover:bg-emerald-600 transition-all shadow-lg shadow-zinc-200 dark:shadow-none"
+                    className="px-8 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-black uppercase tracking-widest rounded-full hover:bg-emerald-600 transition-all shadow-lg shadow-zinc-200 dark:shadow-none"
                 >
                     Thử lại ngay
                 </button>
@@ -130,7 +130,7 @@ export default function Page() {
                     <div className="flex flex-col items-start lg:items-end gap-4">
                         <div className="flex items-center gap-4">
                             {data?.lastUpdated && (
-                                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg border border-zinc-100 dark:border-zinc-800">
+                                <div className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-zinc-800/50 rounded-lg border border-zinc-100 dark:border-zinc-800 shadow-sm">
                                     <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-600" />
                                     <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         Cập nhật: {new Date(data.lastUpdated).toLocaleTimeString('vi-VN')}
@@ -159,15 +159,20 @@ export default function Page() {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={cn(
-                                    "flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all",
+                                    "flex items-center gap-2 md:gap-3 px-4 md:px-6 py-1 pr-6 md:py-3 rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all",
                                     isActive
                                         ? "bg-zinc-900 dark:bg-emerald-600 text-white shadow-xl shadow-zinc-300 dark:shadow-none scale-105"
                                         : "bg-transparent text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800"
                                 )}
                             >
-                                <Icon size={16} />
-                                <span className="hidden sm:inline">{tab.label}</span>
-                                <span className="sm:hidden">{tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}</span>
+                                <div className={cn(
+                                    "w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
+                                    isActive ? "bg-white/10" : "bg-zinc-50 dark:bg-zinc-800"
+                                )}>
+                                    <Icon size={16} />
+                                </div>
+                                <span className="hidden sm:inline ml-1">{tab.label}</span>
+                                <span className="sm:hidden ml-1">{tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}</span>
                             </button>
                         );
                     })}
@@ -181,7 +186,7 @@ export default function Page() {
                             ))
                         ) : (
                             <div className="col-span-full py-32 text-center bg-zinc-50 dark:bg-zinc-800/30 rounded-3xl border-2 border-dashed border-zinc-200 dark:border-zinc-800">
-                                <p className="text-zinc-400 font-bold uppercase tracking-widest text-sm">Chưa có dữ liệu mới cho mục này</p>
+                                <p className="text-zinc-400 font-black uppercase tracking-widest text-sm">Chưa có dữ liệu mới cho mục này</p>
                                 <p className="text-zinc-300 dark:text-zinc-600 text-xs mt-2">Vui lòng quay lại sau ít phút</p>
                             </div>
                         )}

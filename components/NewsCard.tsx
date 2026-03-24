@@ -32,6 +32,7 @@ export default function NewsCard({ item, index }: { item: NewsItem; index: numbe
                     src={item.thumbnail}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    referrerPolicy="no-referrer"
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${index}/600/400`;
                     }}
@@ -55,12 +56,12 @@ export default function NewsCard({ item, index }: { item: NewsItem; index: numbe
                     {item.title}
                 </h3>
 
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-3 mb-4 leading-relaxed">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-3 mb-6 leading-relaxed">
                     {item.content}
                 </p>
 
                 {/* AI SUMMARY SECTION */}
-                <div className="mb-4">
+                <div className="mb-6">
                     <button
                         onClick={async (e) => {
                             e.preventDefault();
@@ -79,9 +80,15 @@ export default function NewsCard({ item, index }: { item: NewsItem; index: numbe
                                 setLoading(false);
                             }
                         }}
-                        className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 rounded-lg text-[10px] font-bold transition-colors"
+                        className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 rounded-lg text-[10px] font-black uppercase tracking-[0.1em] transition-colors"
                     >
-                        {loading ? "⌛ Đang tóm tắt..." : summary ? "✅ Đã tóm tắt" : "🤖 Tóm tắt nhanh"}
+                        {loading ? (
+                            <span className="flex items-center gap-2">⌛ Tóm tắt...</span>
+                        ) : summary ? (
+                            <span className="flex items-center gap-2">✅ Đã tóm tắt</span>
+                        ) : (
+                            <span className="flex items-center gap-2">🤖 Tóm tắt nhanh</span>
+                        )}
                     </button>
                     
                     <AnimatePresence>
@@ -89,6 +96,7 @@ export default function NewsCard({ item, index }: { item: NewsItem; index: numbe
                             <motion.div 
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
                                 className="mt-2 p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden"
                             >
                                 <p className="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed italic">
@@ -100,7 +108,7 @@ export default function NewsCard({ item, index }: { item: NewsItem; index: numbe
                 </div>
 
                 <div className="mt-auto flex items-center justify-between pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                    <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest group-hover:translate-x-1 transition-transform flex items-center gap-1">
                         Đọc tiếp <ChevronRight size={10} />
                     </span>
                     <ExternalLink size={14} className="text-zinc-300 dark:text-zinc-600 group-hover:text-emerald-500 transition-colors" />
@@ -108,4 +116,4 @@ export default function NewsCard({ item, index }: { item: NewsItem; index: numbe
             </div>
         </motion.a>
     );
-}
+}
